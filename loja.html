@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>J Tech Store</title>
+    <meta name="description" content="J Tech Store: loja online de eletrônicos com os melhores preços em celulares, notebooks e fones de ouvido.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <div class="envolucro">
+            <!-- Marca em SVG: não depende de nenhuma imagem externa, então
+                 nunca aparece quebrada, e some/aparece junto da animação. -->
+            <div class="marca">
+                <svg class="marca-simbolo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/>
+                </svg>
+                <span class="marca-nome">J Tech Store</span>
+            </div>
+
+            <div class="linha-energia"></div>
+
+            <div class="hero-texto">
+                <h1>
+                    <span class="hero-linha"><span>Tecnologia com</span></span>
+                    <span class="hero-linha"><span>os melhores preços</span></span>
+                </h1>
+                <p class="tagline">Bem-vindo à J Tech Store! Somos uma loja online especializada em eletrônicos.</p>
+                <a class="botao-whatsapp" href="https://wa.me/5511999999999?text=Ol%C3%A1%20J%20Tech%20Store!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos." target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu-principal">
+        <ul>
+            <li><a href="loja.html">Home</a></li>
+            <li><a href="produtos.html">Produtos</a></li>
+            <li><a href="fale.html">Contato</a></li>
+            <li class="menu-carrinho"><button class="botao-carrinho" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="carrinho-contagem">0</span></button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="envolucro">
+
+            <section>
+                <p class="titulo-secao"><strong>Categorias</strong></p>
+                <ul class="especificacoes">
+                    <li><a href="produtos.html#smartphone-samsung">📱 Celulares</a></li>
+                    <li><a href="produtos.html#notebook-lenovo">💻 Notebooks</a></li>
+                    <li><a href="produtos.html#headphone-vj320">🎧 Fones</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <p class="titulo-secao"><strong>Produtos em destaque</strong></p>
+                <div class="lista-produtos">
+
+                    <article class="produto" id="smartphone-samsung" data-produto="Smartphone Samsung" data-preco="1500">
+                        <img src="https://imgs.pontofrio.com.br/55071160/1xg.jpg" alt="Smartphone Samsung">
+                        <div class="produto-info">
+                            <h4><a href="produtos.html#smartphone-samsung">Smartphone Samsung</a></h4>
+                            <span class="categoria">celulares</span>
+                        </div>
+                        <span class="preco">R$ 1.500</span>
+                        <button class="botao-adicionar" type="button" data-adicionar-carrinho>Adicionar</button>
+                    </article>
+
+                    <article class="produto" id="notebook-lenovo" data-produto="Notebook Lenovo" data-preco="2208">
+                        <img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS8tZk-sJ_JNXUF3jjLDtGrpMXzYeZmbA4ERAJm7xWnuE_szVFSoR32PEM5BSCTSqhI_W79GcVkZabI1fQeeaqYGsUw5O4_FA" alt="Notebook Lenovo">
+                        <div class="produto-info">
+                            <h4><a href="produtos.html#notebook-lenovo">Notebook Lenovo</a></h4>
+                            <span class="categoria">notebooks</span>
+                        </div>
+                        <span class="preco">R$ 2.208</span>
+                        <button class="botao-adicionar" type="button" data-adicionar-carrinho>Adicionar</button>
+                    </article>
+
+                    <article class="produto" id="headphone-vj320" data-produto="Headphone Bluetooth Vj320" data-preco="334.78">
+                        <img src="https://http2.mlstatic.com/D_NQ_NP_2X_684509-MLB90176061526_082025-F.webp" alt="Headphone Bluetooth Vj320">
+                        <div class="produto-info">
+                            <h4><a href="produtos.html#headphone-vj320">Headphone Bluetooth Vj320</a></h4>
+                            <span class="categoria">fones</span>
+                        </div>
+                        <span class="preco">R$ 334,78</span>
+                        <button class="botao-adicionar" type="button" data-adicionar-carrinho>Adicionar</button>
+                    </article>
+
+                </div>
+            </section>
+
+            <section>
+                <p class="titulo-secao"><strong>Explore por categoria</strong></p>
+                <div class="grade-categorias">
+                    <a class="categoria-destaque" href="produtos.html#smartphone-samsung">
+                        <span class="categoria-numero">01</span>
+                        <span class="categoria-icone" aria-hidden="true">📱</span>
+                        <strong>Celulares</strong>
+                        <span>Desempenho para acompanhar sua rotina.</span>
+                        <span class="categoria-link">Ver celulares →</span>
+                    </a>
+                    <a class="categoria-destaque" href="produtos.html#notebook-lenovo">
+                        <span class="categoria-numero">02</span>
+                        <span class="categoria-icone" aria-hidden="true">💻</span>
+                        <strong>Notebooks</strong>
+                        <span>Mais espaço para estudar, criar e trabalhar.</span>
+                        <span class="categoria-link">Ver notebooks →</span>
+                    </a>
+                    <a class="categoria-destaque" href="produtos.html#headphone-vj320">
+                        <span class="categoria-numero">03</span>
+                        <span class="categoria-icone" aria-hidden="true">🎧</span>
+                        <strong>Fones</strong>
+                        <span>Seu som com liberdade e qualidade.</span>
+                        <span class="categoria-link">Ver fones →</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="envolucro">
+            <span>© <span id="ano-atual">2026</span> J Tech Store — Todos os direitos reservados</span>
+            <div class="rodape-contatos">
+                <a href="https://instagram.com/jtechstore" target="_blank" rel="noopener">Instagram @jtechstore</a>
+                <span>WhatsApp (11) 99999-9999</span>
+                <a href="https://facebook.com/jtechstore" target="_blank" rel="noopener">Facebook @jtechstore</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js" defer></script>
+</body>
+</html>

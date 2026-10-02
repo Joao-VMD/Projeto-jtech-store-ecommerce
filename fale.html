@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Contato - J Tech Store</title>
+    <meta name="description" content="Fale com a J Tech Store: envie sua dúvida, sugestão ou pedido pelo nosso formulário de contato.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="site.css">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <div class="envolucro">
+            <div class="marca">
+                <svg class="marca-simbolo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/>
+                </svg>
+                <span class="marca-nome">J Tech Store</span>
+            </div>
+
+            <div class="linha-energia"></div>
+
+            <div class="hero-texto">
+                <h1>
+                    <span class="hero-linha"><span>Fale</span></span>
+                    <span class="hero-linha"><span>com a gente</span></span>
+                </h1>
+                <p class="tagline">Dúvida, sugestão ou pedido — é só preencher os campos abaixo.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu-principal">
+        <ul>
+            <li><a href="loja.html">Home</a></li>
+            <li><a href="produtos.html">Produtos</a></li>
+            <li><a href="fale.html">Contato</a></li>
+            <li class="menu-carrinho"><button class="botao-carrinho" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="carrinho-contagem">0</span></button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="envolucro">
+            <section>
+                <p class="titulo-secao"><strong>Formulário de contato</strong></p>
+
+                <div class="form-contato">
+                    <p class="form-nota">
+                        Site estático, sem servidor por trás: ao enviar, o
+                        <code>js/app.js</code> valida os campos e mostra a
+                        confirmação aqui na tela. Para enviar e-mails de
+                        verdade, ligue o formulário a um serviço como
+                        Formspree, EmailJS ou Google Forms.
+                    </p>
+
+                    <form action="" method="post">
+                        <label for="nome">Nome</label>
+                        <input id="nome" name="nome" type="text" required>
+
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" required>
+
+                        <label for="msg">Mensagem</label>
+                        <textarea id="msg" name="msg" required></textarea>
+
+                        <input type="submit" value="Enviar">
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="envolucro">
+            <span>© <span id="ano-atual">2026</span> J Tech Store — Todos os direitos reservados</span>
+            <div class="rodape-contatos">
+                <a href="https://instagram.com/jtechstore" target="_blank" rel="noopener">Instagram @jtechstore</a>
+                <span>WhatsApp (11) 99999-9999</span>
+                <a href="https://facebook.com/jtechstore" target="_blank" rel="noopener">Facebook @jtechstore</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js" defer></script>
+</body>
+</html>

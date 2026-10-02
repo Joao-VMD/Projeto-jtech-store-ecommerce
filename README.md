@@ -1,40 +1,57 @@
-# J Tech Store
+# 🛒 J Tech Store
 
-Loja virtual de eletrônicos (demonstração) — catálogo por categoria, carrinho de compras funcional e formulário de contato validado, construídos com HTML, CSS e JavaScript puro, sem frameworks.
+Site estático (HTML, CSS e JavaScript puro) de uma loja fictícia de eletrônicos, desenvolvido como projeto de estudo de front-end.
 
+## 🔗 Páginas
 
+| Página | Arquivo | Descrição |
+|---|---|---|
+| Home | `loja.html` | Apresentação da loja, categorias, produtos em destaque e vídeo institucional |
+| Produtos | `produtos.html` | Listagem de produtos por categoria |
+| Contato | `fale.html` | Formulário de contato com validação em JavaScript |
 
-## Funcionalidades
+## 🛠️ Tecnologias
 
-- 🛒 **Carrinho de compras funcional** — adiciona, remove e limpa itens, com total calculado em tempo real e persistência via `localStorage`
-- 📦 **Catálogo por categoria** — celulares, notebooks e fones, com navegação por âncoras
-- ✉️ **Formulário de contato** com validação de campos e mensagem de confirmação
-- 🎯 **Navegação ativa** — o menu destaca automaticamente a página atual
-- 📱 **Totalmente responsivo** — adaptado para mobile, tablet e desktop
-- ♿ **Acessível** — estados de foco visíveis, `aria-live` no feedback do formulário, `prefers-reduced-motion` respeitado
+- **HTML5** semântico (`header`, `nav`, `main`, `section`, `article`, `footer`)
+- **CSS3** com variáveis (`:root`), Flexbox e Media Queries (responsivo para tablet e celular)
+- **JavaScript** puro (`js/app.js`), sem frameworks nem bibliotecas
 
-## Tecnologias
+## ✨ Funcionalidades
 
-- HTML5 semântico
-- CSS3 (variáveis, grid, flexbox, animações)
-- JavaScript vanilla (sem dependências ou build step)
+- Layout 100% responsivo (desktop, tablet e celular)
+- Menu de navegação que destaca automaticamente a página atual
+- Ano do rodapé atualizado automaticamente via JavaScript
+- Validação e mensagem de feedback no formulário de contato
+- Produtos e categorias com links diretos para cada item do catálogo
+- Carrinho lateral com quantidade, total, remoção de itens e persistência no navegador
+- Acessibilidade: contraste, `alt` em imagens e destaque de foco no teclado
 
-## Estrutura do projeto
+## 📁 Estrutura de pastas
 
 ```
-jtech-store-ecommerce/
-├── loja.html        → Página inicial
-├── produtos.html    → Catálogo completo
-├── fale.html        → Formulário de contato
-├── site.css         → Estilos do site
-└── js/
-    └── app.js       → Lógica do carrinho, menu ativo e formulário
+├── loja.html
+├── produtos.html
+├── fale.html
+├── site.css
+├── js/
+│   └── app.js
+├── img/
+│   ├── logo.png
+│   └── fundo1.png
+└── README.md
 ```
 
-## Como rodar localmente
+> ⚠️ As imagens `img/logo.png` e `img/fundo1.png` precisam estar dentro da pasta `img/` do repositório para aparecerem corretamente.
 
-Não precisa de instalação nem build — é só abrir o `loja.html` no navegador, ou usar uma extensão como o **Live Server** no VS Code para recarregamento automático.
+## 🚀 Como usar
 
-## Sobre o projeto
+Basta abrir o arquivo `loja.html` no navegador — não é necessário nenhum servidor ou instalação.
 
-Este é um projeto de demonstração desenvolvido por João Moglia, através da **Nexus Frost**, estúdio de criação de sites sob medida.
+## 📌 Próximos passos (melhorias futuras)
+
+- Conectar o formulário de contato a um serviço real de envio de e-mail (ex.: Formspree, EmailJS)
+- Adicionar mais produtos e uma página de detalhes por produto
+- Adicionar um favicon
+
+---
+Desenvolvido como projeto pessoal de estudo em HTML, CSS e JavaScript.

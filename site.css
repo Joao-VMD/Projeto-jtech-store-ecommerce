@@ -1,0 +1,811 @@
+/* ==========================================================================
+   J TECH STORE — site.css
+
+   DIREÇÃO VISUAL: "ficha técnica de loja de eletrônicos", não um site
+   genérico de SaaS. Por isso:
+   - Conteúdo alinhado à esquerda (não tudo centralizado).
+   - Produtos em LINHAS de especificação (como uma tabela de loja física
+     de eletrônicos), não cards soltos com sombra e cantos arredondados.
+   - Preços e categorias em fonte monoespaçada (remete a datasheet/etiqueta
+     de produto).
+   - Uma única animação: o cabeçalho "liga" como um aparelho eletrônico
+     (uma linha de energia acende e o texto é revelado). Nenhuma outra
+     seção anima sozinha — só reagem a hover/foco do usuário.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1) VARIÁVEIS GLOBAIS
+   -------------------------------------------------------------------------- */
+:root {
+    --fonte-titulo: "Archivo", Arial, sans-serif;
+    --fonte-texto: "Inter", Arial, sans-serif;
+    --fonte-dados: "IBM Plex Mono", "Courier New", monospace;
+
+    --cor-fundo: #0e0d0b;
+    --cor-fundo-elevado: #16140f;
+    --cor-fundo-footer: #000000;
+
+    --cor-texto: #f2efe9;
+    --cor-texto-suave: #9c9585;
+
+    --cor-acento: #ff9a3d;   /* âmbar — "LED de energia" ligado */
+    --cor-acento-2: #6fd7c9; /* ciano suave — "LED de dados", uso pontual */
+
+    --borda: rgba(242, 239, 233, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   2) BASE / RESET
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--fonte-texto);
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px),
+        url("img/fundo1.png");
+    background-size: auto, cover;
+    background-position: top, center;
+    background-repeat: repeat, no-repeat;
+    background-attachment: scroll, fixed;
+    line-height: 1.55;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--cor-acento);
+    outline-offset: 3px;
+}
+
+.envolucro {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --------------------------------------------------------------------------
+   3) CABEÇALHO + ANIMAÇÃO DE "LIGAR" (única animação do site)
+   -------------------------------------------------------------------------- */
+.cabecalho {
+    background-color: var(--cor-fundo-elevado);
+    border-bottom: 1px solid var(--borda);
+    padding: 28px 0 40px;
+    overflow: hidden;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: aparecer 0.5s ease 0.5s forwards;
+}
+
+.marca-simbolo {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    color: var(--cor-acento);
+}
+
+.marca-nome {
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+}
+
+/* A linha de energia: começa "fechada" (largura 0) e se estende da
+   esquerda pra direita, como o LED de um aparelho acendendo. */
+.linha-energia {
+    height: 2px;
+    width: 100%;
+    margin: 20px 0 22px;
+    background: linear-gradient(90deg, var(--cor-acento), var(--cor-acento-2));
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: ligar 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
+}
+
+.hero-texto {
+    max-width: 640px;
+}
+
+/* Cada linha do título fica dentro de um "visor" (overflow hidden) e é
+   revelada de baixo pra cima — o único movimento de texto do site. */
+.hero-linha {
+    overflow: hidden;
+}
+
+.hero-linha span {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: revelar 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+}
+
+.cabecalho h1 {
+    font-size: clamp(26px, 4.5vw, 38px);
+    line-height: 1.15;
+}
+
+.cabecalho p.tagline {
+    margin-top: 14px;
+    color: var(--cor-texto-suave);
+    max-width: 480px;
+    opacity: 0;
+    animation: aparecer 0.6s ease 1.05s forwards;
+}
+
+.botao-whatsapp {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 11px 16px;
+    border: 1px solid var(--cor-acento-2);
+    color: var(--cor-acento-2);
+    font-family: var(--fonte-dados);
+    font-size: 0.82rem;
+    text-decoration: none;
+    opacity: 0;
+    animation: aparecer 0.6s ease 1.2s forwards;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.botao-whatsapp:hover {
+    background-color: var(--cor-acento-2);
+    color: #10201d;
+}
+
+@keyframes ligar {
+    to { transform: scaleX(1); }
+}
+
+@keyframes revelar {
+    to { transform: translateY(0); }
+}
+
+@keyframes aparecer {
+    to { opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   4) NAVEGAÇÃO — abas com sublinhado, não pílulas
+   -------------------------------------------------------------------------- */
+.menu-principal {
+    background-color: var(--cor-fundo);
+    border-bottom: 1px solid var(--borda);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.menu-principal ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 4px;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+    overflow-x: auto;
+}
+
+.menu-principal a {
+    display: inline-block;
+    padding: 16px 14px;
+    text-decoration: none;
+    color: var(--cor-texto-suave);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 0.92rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+}
+
+.menu-principal a:hover {
+    color: var(--cor-texto);
+}
+
+.menu-principal a.ativo {
+    color: var(--cor-acento);
+    border-bottom-color: var(--cor-acento);
+}
+
+.menu-carrinho {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.botao-carrinho,
+.botao-adicionar,
+.botao-limpar-carrinho {
+    border: 1px solid var(--cor-acento);
+    padding: 8px 12px;
+    color: var(--cor-acento);
+    font-family: var(--fonte-dados);
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.botao-carrinho:hover,
+.botao-adicionar:hover,
+.botao-limpar-carrinho:hover {
+    background: var(--cor-acento);
+    color: #1a1206;
+}
+
+.carrinho-contagem {
+    display: inline-grid;
+    place-items: center;
+    min-width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    border-radius: 50%;
+    background: var(--cor-acento);
+    color: #1a1206;
+    font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   5) TÍTULOS DE SEÇÃO — marcador entre colchetes, remete a rótulo técnico
+   -------------------------------------------------------------------------- */
+main {
+    display: block;
+    padding: 8px 0 10px;
+}
+
+section {
+    padding: 44px 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+.titulo-secao {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--cor-texto-suave);
+    font-family: var(--fonte-dados);
+    margin-bottom: 22px;
+}
+
+.titulo-secao::before {
+    content: "[";
+    color: var(--cor-acento);
+}
+
+.titulo-secao::after {
+    content: "]";
+    color: var(--cor-acento);
+}
+
+.titulo-secao strong {
+    color: var(--cor-texto);
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0;
+}
+
+/* --------------------------------------------------------------------------
+   6) CATEGORIAS — linha de especificações, não badges
+   -------------------------------------------------------------------------- */
+.especificacoes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--borda);
+}
+
+.especificacoes li {
+    flex: 1 1 160px;
+    padding: 16px 20px;
+    border-right: 1px solid var(--borda);
+    border-bottom: 1px solid var(--borda);
+    font-family: var(--fonte-dados);
+    font-size: 0.95rem;
+}
+
+.especificacoes li:last-child {
+    border-right: none;
+}
+
+.especificacoes a,
+.produto-info h4 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.especificacoes a:hover,
+.produto-info h4 a:hover {
+    color: var(--cor-acento);
+    text-decoration: underline;
+}
+
+.grade-categorias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--borda);
+    border-left: 1px solid var(--borda);
+}
+
+.categoria-destaque {
+    min-height: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-right: 1px solid var(--borda);
+    border-bottom: 1px solid var(--borda);
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.categoria-destaque:hover {
+    background-color: rgba(255, 154, 61, 0.08);
+    border-color: var(--cor-acento);
+}
+
+.categoria-numero {
+    color: var(--cor-acento);
+    font-family: var(--fonte-dados);
+    font-size: 0.75rem;
+}
+
+.categoria-icone {
+    font-size: 2rem;
+    margin-top: 12px;
+}
+
+.categoria-destaque strong {
+    font-family: var(--fonte-titulo);
+    font-size: 1.15rem;
+}
+
+.categoria-destaque > span:not(.categoria-numero):not(.categoria-icone):not(.categoria-link) {
+    color: var(--cor-texto-suave);
+    font-size: 0.88rem;
+}
+
+.categoria-link {
+    color: var(--cor-acento-2);
+    font-family: var(--fonte-dados);
+    font-size: 0.78rem;
+    margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   7) PRODUTOS — linhas horizontais (estilo tabela), não cards
+   -------------------------------------------------------------------------- */
+.lista-produtos {
+    display: flex;
+    flex-direction: column;
+}
+
+.produto {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0;
+    scroll-margin-top: 72px;
+    border-top: 1px solid var(--borda);
+    transition: padding-left 0.2s ease, border-color 0.2s ease;
+}
+
+.lista-produtos .produto:last-child {
+    border-bottom: 1px solid var(--borda);
+}
+
+.produto:hover {
+    padding-left: 10px;
+    border-color: var(--cor-acento);
+}
+
+.produto img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--borda);
+    background: var(--cor-fundo-elevado);
+}
+
+.produto-info h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.produto-info .categoria {
+    display: block;
+    margin-top: 3px;
+    font-family: var(--fonte-dados);
+    font-size: 0.78rem;
+    color: var(--cor-texto-suave);
+}
+
+.produto .preco {
+    font-family: var(--fonte-dados);
+    font-weight: 700;
+    color: var(--cor-acento);
+    white-space: nowrap;
+}
+
+.botao-adicionar {
+    background: transparent;
+    white-space: nowrap;
+}
+
+.painel-carrinho {
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    right: 0;
+    width: min(390px, 100%);
+    height: 100vh;
+    padding: 24px;
+    background: var(--cor-fundo-elevado);
+    border-left: 1px solid var(--cor-acento);
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.painel-carrinho.aberto {
+    transform: translateX(0);
+}
+
+.carrinho-cabecalho,
+.carrinho-rodape,
+.carrinho-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.carrinho-cabecalho {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.carrinho-cabecalho h2 {
+    font-size: 1.3rem;
+}
+
+.carrinho-fechar {
+    border: 0;
+    color: var(--cor-texto);
+    cursor: pointer;
+    font-size: 1.7rem;
+    padding: 0 8px;
+}
+
+.carrinho-itens {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.carrinho-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--borda);
+    font-family: var(--fonte-dados);
+    font-size: 0.85rem;
+}
+
+.carrinho-item small {
+    color: var(--cor-texto-suave);
+}
+
+.carrinho-item button {
+    border: 0;
+    color: var(--cor-texto-suave);
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0;
+}
+
+.carrinho-item button:hover {
+    color: var(--cor-acento);
+}
+
+.carrinho-vazio {
+    color: var(--cor-texto-suave);
+    padding: 24px 0;
+}
+
+.carrinho-rodape {
+    align-items: flex-end;
+    border-top: 1px solid var(--borda);
+    padding-top: 20px;
+    flex-wrap: wrap;
+}
+
+.carrinho-total {
+    color: var(--cor-acento);
+    display: block;
+    font-family: var(--fonte-dados);
+    margin-top: 5px;
+}
+
+.botao-limpar-carrinho {
+    background: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   8) VÍDEO — moldura tipo "tela de aparelho"
+   -------------------------------------------------------------------------- */
+.tela {
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 8px;
+    background: var(--cor-fundo-elevado);
+    max-width: 560px;
+}
+
+.tela-barra {
+    display: flex;
+    gap: 6px;
+    padding: 0 4px 8px;
+}
+
+.tela-barra span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--borda);
+}
+
+.tela iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   9) FORMULÁRIO DE CONTATO
+   -------------------------------------------------------------------------- */
+.form-contato {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+@media (min-width: 640px) {
+    .form-contato {
+        grid-template-columns: 1fr 1.3fr;
+    }
+}
+
+.form-nota {
+    color: var(--cor-texto-suave);
+    font-size: 0.92rem;
+    max-width: 320px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+label {
+    font-family: var(--fonte-dados);
+    font-size: 0.8rem;
+    color: var(--cor-texto-suave);
+    margin-top: 14px;
+}
+
+input,
+textarea,
+button {
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--cor-texto);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--borda);
+    padding: 10px 2px;
+    border-radius: 0;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--cor-texto-suave);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+    border: 1px solid var(--borda);
+    padding: 10px;
+    margin-top: 4px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--cor-acento);
+}
+
+input[type="submit"] {
+    align-self: flex-start;
+    margin-top: 22px;
+    padding: 12px 26px;
+    background-color: var(--cor-acento);
+    color: #1a1206;
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--cor-acento-2);
+}
+
+.mensagem-feedback {
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--cor-acento);
+    background: rgba(255, 154, 61, 0.08);
+    font-size: 0.92rem;
+}
+
+/* --------------------------------------------------------------------------
+   10) RODAPÉ
+   -------------------------------------------------------------------------- */
+.rodape {
+    background-color: var(--cor-fundo-footer);
+    padding: 30px 0;
+}
+
+.rodape .envolucro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+}
+
+.rodape-contatos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+}
+
+.rodape a {
+    color: var(--cor-texto-suave);
+    text-decoration: none;
+}
+
+.rodape a:hover {
+    color: var(--cor-acento);
+}
+
+/* --------------------------------------------------------------------------
+   11) RESPONSIVO
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    section {
+        padding: 32px 0;
+    }
+
+    .menu-principal ul {
+        padding: 0 16px;
+    }
+
+    .grade-categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .categoria-destaque {
+        min-height: 220px;
+    }
+
+    .painel-carrinho {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .produto {
+        grid-template-columns: 60px minmax(0, 1fr) auto;
+        gap: 12px;
+    }
+
+    .produto .botao-adicionar {
+        grid-column: 2 / -1;
+        justify-self: start;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .envolucro {
+        padding: 0 16px;
+    }
+
+    .cabecalho {
+        padding: 22px 0 30px;
+    }
+
+    .produto {
+        grid-template-columns: 56px 1fr auto;
+    }
+
+    .produto img {
+        width: 56px;
+        height: 56px;
+    }
+
+    .especificacoes li {
+        flex: 1 1 100%;
+        border-right: none;
+    }
+
+    .grade-categorias {
+        grid-template-columns: 1fr;
+    }
+
+    .categoria-destaque {
+        min-height: 190px;
+    }
+
+    .rodape .envolucro {
+        flex-direction: column;
+    }
+}
